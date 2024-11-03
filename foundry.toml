@@ -1,0 +1,22 @@
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+
+[profile.default]
+src = "contract"
+out = "build"
+test = "test"
+script = "script"
+libs = [
+  "dependencies"
+]
+# https://github.com/ethereum/solidity/releases
+solidity_version = '0.8.28'
+# https://docs.blockscout.com/setup/information-and-settings/evm-version-information
+evm_version = 'shanghai'
+
+[rpc_endpoints]
+localnet = "http://127.0.0.1:8545"
+
+[dependencies]
+forge-std = { version = "1.9.4", git = "https://github.com/foundry-rs/forge-std.git", tag = "v1.9.4" }
+
+
