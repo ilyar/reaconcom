@@ -1,7 +1,7 @@
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [package]
-name = "reaconcom"
-version = "0.1.0"
+name = "cli"
+version = "1.0.0-alpha.0"
 edition = "2021"
 
 [[bin]]

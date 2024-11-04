@@ -2,7 +2,7 @@ use alloy::{
     primitives::Address,
     providers::{Provider, ProviderBuilder, WsConnect},
 };
-use contract::Counter;
+use contract::Service;
 use eyre::Result;
 
 #[tokio::main]
@@ -26,7 +26,7 @@ async fn main() -> Result<()> {
 
     let address = "0x5fbdb2315678afecb367f032d93f642f64180aa3".parse::<Address>()?;
     //
-    let contract = Counter::new(address, provider);
+    let contract = Service::new(address, provider);
     let tx_hash = contract.increment().send().await?.watch().await?;
     println!("Incremented number: {tx_hash}");
     let number = contract.number().call().await?._0;

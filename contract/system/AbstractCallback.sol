@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
-import "./IPayable.sol";
-import "./AbstractPayer.sol";
+import {IPayable} from "./IPayable.sol";
+import {AbstractPayer} from "./AbstractPayer.sol";
 
 abstract contract AbstractCallback is AbstractPayer {
     address internal rvm_id;

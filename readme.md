@@ -9,46 +9,56 @@ title: Reaconcom
 %%{ init: { 'flowchart': { 'curve': 'basis' } } }%%
 flowchart RL
     subgraph cli["CLI"]
+        setup -. call .-> computing
         subgraph SN["Secret Network"]
             subgraph CC["Confidential Computing"]
-                SNCC("ComputingContract")
+                computing("ComputingContract")
             end
-            subgraph SP["SecretPath"]
-                SNGC("GatewayContract")
+            subgraph SPSN["SecretPath"]
+                gatewaySN("GatewayContract")
             end
-     
         end
+
+        external -. call .-> appL1
+        appL1 -. event .-> appL1
         subgraph L1["L1 Network"]
             subgraph EVM["EVM"]
-                L1OC("ObservedContract")
-                L1DC("DestinationContract")
+                appL1("ServiceContract")
+                сallbackL1("CallbackContract")
+                gatewayL1("GatewayContract")
             end
         end
+
         subgraph RN["Reactive Network"]
             subgraph RVM["ReactVM"]
-                RNC("ReactiveContract")
+                reactiveRN("ReactiveContract")
             end
         end
     end
 
-    L1OC -. emitted log .-> RNC
-    RNC -. emitted log .-> SNGC
-    SNGC -. emitted log .-> CC
-    CC -. callback .-> SNGC
-    SNGC -. callback .-> L1DC
+    appL1 -. emitted log .-> reactiveRN
+    reactiveRN -. emitted log .-> сallbackL1
+    сallbackL1 -. emitted log .-> gatewayL1
+    gatewayL1 -. emitted log .-> gatewaySN
+    gatewaySN -. emitted log .-> computing
+    computing -. callback .-> gatewaySN
+    gatewaySN -. callback .-> gatewayL1
+    gatewayL1 -. callback .-> appL1
 ```
 
 ## Work in progress
 
 - [x] gateway contract via Secret Network
 - [ ] implement computing contract
-- [ ] implement destination contract
+- [x] implement destination contract
 - [ ] implement reactive contract via Reactive Network
-- [ ] implement demo observed contract
+- [x] implement demo observed contract
 - [ ] deploy demo case
 - [ ] implement cli
 - [ ] add usage description
-- [ ] add tests
+- [x] add tests destination basic case
+- [ ] add tests reactive basic case
+- [ ] add tests demo case
 
 ## Usage
 
