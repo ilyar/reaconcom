@@ -1,0 +1,36 @@
+[package]
+name = "computing"
+version = "1.0.0-alpha.0"
+edition = "2021"
+
+[[bin]]
+name = "schema"
+path = "schema.rs"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+path = "lib.rs"
+
+[features]
+default = []
+# for quicker tests, cargo test --lib
+# for more explicit tests, cargo test --features=backtraces
+backtraces = ["cosmwasm-std/backtraces"]
+
+[dependencies]
+cosmwasm-std = { package = "secret-cosmwasm-std", version = "1.1.11" }
+cosmwasm-storage = { package = "secret-cosmwasm-storage", version = "1.1.11" }
+schemars = { version = "0.8.11" }
+serde = { version = "1.0" }
+thiserror = { version = "1.0" }
+cosmwasm-schema = "1.5"
+
+# Uncomment these for some common extra tools
+# secret-toolkit = { git = "https://github.com/scrtlabs/secret-toolkit", tag = "v0.8.0" }
+# cw-storage-plus = { version = "1.0.1", default-features = false }
+
+# [patch.crates-io]
+# uncomment this if you use cw-storage-plus
+# cosmwasm-std = { git = "https://github.com/scrtlabs/cosmwasm", tag = "v1.1.9-secret" }
+
+

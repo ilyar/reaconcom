@@ -7,14 +7,14 @@ This agreement is for collaboration, it may not be detailed enough, if it is not
 ### Step 1 — get code
 
 ```shell
-git clone git@github.com:ilyar/reactive-hackathon.git
-cd reactive-hackathon
+git clone git@github.com:ilyar/reaconcom.git
+cd reaconcom
 git checkout -b name-of-feature origin/main
 ```
 
 ### Step 2 — write code
 
-Coding and testing local see [README.md Development](https://github.com/ilyar/reactive-hackathon#development)
+Coding and testing local see [README.md Development](https://github.com/ilyar/reaconcom#development)
 
 > Git history: work log vs recipe https://www.bitsnbites.eu/git-history-work-log-vs-recipe/
 
@@ -33,7 +33,7 @@ git commit --message "fix: hide password display when searching for a user"
 ### Step 3 — make fork
 
 Follow by link for make fork:
-https://github.com/ilyar/reactive-hackathon/fork
+https://github.com/ilyar/reaconcom/fork
 
 Setup your remote
 
@@ -52,7 +52,7 @@ git push --set-upstream self name-of-feature
 Follow by link:
 
 ```shell
-https://github.com/ilyar/reactive-hackathon/pull/new/name-of-feature
+https://github.com/ilyar/reaconcom/pull/new/name-of-feature
 ```
 
 ### Step 5 — update branch from main
