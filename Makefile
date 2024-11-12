@@ -4,18 +4,26 @@ default: release
 
 dependencies:
 	forge soldeer install
+build/contract/%.sol: contract/%.sol dependencies
+	forge build --out build/contract $<
+build/script/%.sol: script/%.sol dependencies
+	forge build --out build/script $<
 
-build: dependencies contract
-	forge build --sizes
+contract/sdk: build/contract/Service.sol build/contract/ReactiveHandler.sol
+	forge bind --bindings-path contract/sdk \
+--select ReactiveHandler \
+--select Service \
+--crate-name contract \
+--crate-version $(shell cat version) \
+--alloy --alloy-version b2278c4
 
-build/bindings: build
-	forge bind --single-file --crate-name contract --skip-cargo-toml --alloy
-
-release/reaconcom: build/bindings
+release/reaconcom: contract/sdk
 	cargo build --release -p cli
 	mrdir -p release
 	cp target/release/reaconcom release/reaconcom
 release: release/reaconcom
+run:
+	cargo run -p cli
 
 build/computing.wasm.gz:
 	cargo run -p computing
@@ -27,22 +35,22 @@ clean:
 	forge clean
 	rm -fr dependencies cache broadcast release
 
-lint: build/bindings
+lint: contract/sdk
 	forge fmt --check
-	#FIXME cargo +nightly fmt --all --check
-	#FIXME cargo +nightly clippy
+	cargo +nightly fmt --all --check
+	cargo +nightly clippy
 
-fmt: build/bindings
+fmt: contract/sdk
 	forge fmt
 	cargo +nightly fmt --all
 
-test-contract: build/bindings
+test-contract: contract/sdk
 	forge test
 
 test: test-contract
-	#FIXME cargo +nightly test
+	cargo +nightly test
 
 qa: lint test
 
-deploy: build
-	FOUNDRY_PROFILE=local forge script script/Demo.sol:Deploy --broadcast
+deploy: build/script/demo.sol
+	FOUNDRY_PROFILE=local forge script --quiet --broadcast script/demo.sol:deploy

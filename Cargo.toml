@@ -2,11 +2,11 @@
 resolver = "2"
 members = [
   "cli",
-  "build/bindings",
 ]
 
 [workspace.dependencies]
-contract = { path = "build/bindings" }
+reaconcom = { path = "sdk" }
+contract = { path = "contract/sdk" }
 
 [profile.release]
 opt-level = 3

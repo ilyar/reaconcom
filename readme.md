@@ -3,12 +3,9 @@
 **Rea**ctive **Con**fidential **Com**puting work fully on-chain and trusted execution environments (TEE) via Intel SGX
 
 ```mermaid
----
-title: Reaconcom
----
 %%{ init: { 'flowchart': { 'curve': 'basis' } } }%%
 flowchart RL
-    subgraph cli["CLI"]
+    subgraph cli["reaconcom-cli"]
         setup -. call .-> computing
         subgraph SN["Secret Network"]
             subgraph CC["Confidential Computing"]
@@ -44,6 +41,30 @@ flowchart RL
     computing -. callback .-> gatewaySN
     gatewaySN -. callback .-> gatewayL1
     gatewayL1 -. callback .-> appL1
+```
+
+```mermaid
+sequenceDiagram
+    actor external
+    box L1 Network
+    participant ServiceContract
+    end
+    box Secret Network
+    participant John
+    end
+    actor setup
+
+    rect rgb(191, 223, 255)
+        note right of Alice: Alice calls John.
+        Alice->>+John: Hello John, how are you?
+        rect rgb(200, 150, 255)
+            Alice->>+John: John, can you hear me?
+            John-->>-Alice: Hi Alice, I can hear you!
+        end
+        John-->>-Alice: I feel great!
+    end
+    Alice ->>+ John: Did you want to go to the game tonight?
+    John -->>- Alice: Yeah! See you there.
 ```
 
 ## Work in progress
