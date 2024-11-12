@@ -15,6 +15,8 @@ evm_version = 'shanghai'
 
 [dependencies]
 forge-std = { version = "1.9.4", git = "https://github.com/foundry-rs/forge-std.git", tag = "v1.9.4" }
+reactive-lib = { version = "0.0.1", git = "https://github.com/Reactive-Network/reactive-lib.git", tag = "v0.0.1" }
+
 
 [rpc_endpoints]
 reactive = "https://kopli-rpc.rkt.ink"

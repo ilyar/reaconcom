@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
-import {IReactive} from "./system/IReactive.sol";
-import {AbstractReactive} from "./system/AbstractPausableReactive.sol";
-import {ISubscriptionService} from "./system/ISubscriptionService.sol";
-import {ISystemContract} from "./system/ISystemContract.sol";
+import {AbstractReactive} from "reactive-lib/abstract-base/AbstractPausableReactive.sol";
+import {ISystemContract} from "reactive-lib/interfaces/ISystemContract.sol";
 
-contract Reactive is IReactive, AbstractReactive {
+contract Reactive is AbstractReactive {
     event Event(
         uint256 indexed chain_id,
         address indexed _contract,
@@ -47,8 +45,6 @@ contract Reactive is IReactive, AbstractReactive {
         vm = !subscription_result;
         _callback = callback;
     }
-
-    receive() external payable {}
 
     // Methods specific to ReactVM instance of the contract
 
