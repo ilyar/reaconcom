@@ -6,15 +6,15 @@ import {Service, topicIncremented} from "../contract/Service.sol";
 import {ReactiveHandler} from "../contract/ReactiveHandler.sol";
 import {Reactive} from "../contract/Reactive.sol";
 
-contract Deploy is Script {
-    uint256 constant LOCAL_CHAIN_ID = 31337;
-    address constant KOPLI_CALLBACK_PROXY_ADDR = address(0x0000000000000000000000000000000000fffFfF);
-    uint256 currentChainId;
-    address deployer;
-    uint256 deployerPrivateKey;
-    Service public service;
-    ReactiveHandler public reactiveHandler;
-    Reactive public reactive;
+contract deploy is Script {
+    uint256 private constant LOCAL_CHAIN_ID = 31337;
+    address private constant KOPLI_CALLBACK_PROXY_ADDR = address(0x0000000000000000000000000000000000fffFfF);
+    uint256 private currentChainId;
+    address private deployer;
+    uint256 private deployerPrivateKey;
+    Service private service;
+    ReactiveHandler private reactiveHandler;
+    Reactive private reactive;
 
     function setUp() public {
         currentChainId = block.chainid;

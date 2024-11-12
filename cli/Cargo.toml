@@ -9,9 +9,9 @@ name = "reaconcom"
 path = "main.rs"
 
 [dependencies]
-contract.workspace = true
+reaconcom.workspace = true
 eyre = "0.6"
-alloy = { git = "https://github.com/alloy-rs/alloy", features = [
+alloy = { git = "https://github.com/alloy-rs/alloy", rev = "b2278c4", features = [
   "full",
   "node-bindings",
   "rpc-types-debug",
